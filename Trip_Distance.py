@@ -453,6 +453,22 @@ JetBlueDatum = {
 def FetchCoordinates(AirportCode):
 	return JetBlueDatum[AirportCode]
 
+def calc_dist(oglat, oglon, dstlat, dstlon):
+    # approximate radius of earth in km
+    R = 6373.0
+
+    lat1 = radians(oglat)
+    lon1 = radians(oglon)
+    lat2 = radians(dstlat)
+    lon2 = radians(dstlon)
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    distance = (R * c) / 1.6
+    return distance
+
 
 def ImportDistanceArgs(originAirport, destAirport):
 	#Imports arguments to GetDistance and calls GetDistance, arguments must be entered IN ORDER in command line
@@ -462,21 +478,11 @@ def ImportDistanceArgs(originAirport, destAirport):
 	OriginLng = FetchCoordinates(originAirport)['lng']
 	DestLat = FetchCoordinates(destAirport)['lat']
 	DestLng = FetchCoordinates(destAirport)['lng']
-	# approximate radius of earth in km
-	R = 6373.0
 
-	lat1 = radians(OriginLat)
-	lon1 = radians(OriginLng)
-	lat2 = radians(DestLat)
-	lon2 = radians(DestLng)
-	dlon = lon2 - lon1
-	dlat = lat2 - lat1
+	return calc_dist(OriginLat, OriginLng, DestLat, DestLng)
 
-	a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-	c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-	distance = (R * c) / 1.6
-	return distance
+
 
 
 

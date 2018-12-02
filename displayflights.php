@@ -2,14 +2,44 @@
 $inputloc1 = $_GET["inputloc1"]; 
 $inputloc2 = $_GET["inputloc2"]; 
 
-$pyresult = exec("python /Users/eli/Sites/testscript.py");
-// echo $pyresult;
+$data = exec("python /Users/eli/Sites/RIPPyret.py '$inputloc1' '$inputloc2' 0.5");
 
-$flight_strings = array("SFO &rarr; EGD", "SDE &rarr; SDF", "CHI &rarr; KBR", "IDB &rarr; BGD", "BMK &rarr; IUY");
-$turbulences = array(20, 40, 50, 60, 100);
+// Removing the outer list brackets
+$data =  substr($data,1,-1);
+
+// Removing the outer list brackets
+$data =  substr($data,1,-1);
+
+$myArr = array();
+// Will get a 3 dimensional array, one dimension for each list
+$myArr =explode('],', $data);
+
+// Removing last list bracket for the last dimension
+if(count($myArr)>1)
+$myArr[count($myArr)-1] = substr($myArr[count($myArr)-1],0,-1);
+
+// Removing first last bracket for each dimenion and breaking it down further
+foreach ($myArr as $key => $value) {
+ $value = substr($value,1);
+ $myArr[$key] = array();
+ $myArr[$key] = explode(',',$value);
+}
+
+$flight_strings = array();
+$turbulences = array();
 $wait_times = array(60, 20, 1, 100, 50);
 $avg_ratings = array(100, 90, 80, 60, 10);
-$travel_times = array(50, 50, 50, 50, 50);
+$travel_times = array();
+
+$flight_strings[] = substr($myArr[0][0], 0, -1);
+$travel_times[] = ((float) substr($myArr[2][0], 1))*100;
+$turbulences[] = ((float) substr($myArr[3][0], 1))*100;
+
+for ($x = 1; $x < count($myArr[0]); $x++) {
+  $flight_strings[] = substr($myArr[0][$x], 2, -1);
+  $travel_times[] = (float) $myArr[2][$x] * 100;
+  $turbulences[] = (float) $myArr[3][$x] * 100;
+}
 
 echo '<div class="row">
 <div class="col-3">

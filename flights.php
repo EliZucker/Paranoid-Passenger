@@ -66,7 +66,90 @@ $inputloc2 = $_GET["inputloc2"];
 
 <div id="error_msg"> </div>
     <div id="content">
-    <div class="starter-template"><img src='1amw.gif' />
+    <div class="starter-template">
+
+      <img src='plane-loader-slower.gif' />
+
+      <!-- <canvas id="mycanvas">Get a new browser</canvas>
+		<script>
+		var c = document.getElementById("mycanvas");
+		c.width = 800;
+		c.height = 500;
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+		var ctx = c.getContext("2d");
+		var plane = new Image();
+		plane.src = './bplane.png';
+
+		plane.height = window.innerWidth / 10;
+		plane.width = window.innerWidth / 10;
+
+		var x = -100;
+		var y = c.height / 6;
+		var angle = -45;
+		//y = 3 * (c.height / 10)
+
+
+		//These would need to be adjusted on a different screen sixze
+		var max_drift = c.height / 50;
+		var period_adjust = 0.5;
+
+		/*
+		The height is a function of a a sinosoidal function
+		The delta is a function of the sinosoidal function
+		*/
+
+
+		function draw(x, y, ang)
+		{
+			cx = x + (plane.width / 2)
+			cy = y + (plane.height / 2)
+			ctx.fillStyle = "white";
+			ctx.fillRect(0,0,c.width,c.height);	  		
+	  		ctx.save()
+	  		ctx.translate(x + (plane.width / 2), y + (plane.height / 2));
+			ctx.rotate(-ang*Math.PI/180);
+			ctx.drawImage(plane, - (plane.width / 2), - (plane.height / 2), plane.width, plane.height);
+			ctx.restore();
+		}
+
+		plane.onload = function() {
+			draw(x, y, angle)
+		};
+
+		/*
+			Init params:
+			var x = 100;
+			var y = 150;
+			var angle = 56;
+
+			Takeoff code:
+			x = x + 8;
+			angle = angle + 0.002 * x;
+			y = y - x * 0.01
+			draw(x, y, angle);
+		*/
+
+		function update()
+		{
+			
+			if (x  > c.width - (plane.width + 30))
+			{
+				x = -200
+				y = c.height / 6
+			}
+				
+			x = x + 8;
+			drift = Math.cos(period_adjust*x*Math.PI/180) * max_drift;
+			y = y + drift
+			draw(x-100, y, angle);
+		}
+
+		setInterval(update, 32)
+
+
+		</script> -->
+
     </div>
     </div>
      <script type="text/javascript">

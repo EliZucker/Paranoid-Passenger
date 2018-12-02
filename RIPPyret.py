@@ -1,13 +1,17 @@
 from flights import Flight
-import random
 from Dijkstra import make_edge, Graph
 from turb import calc_turbulence
 from Datum import Cache
 from Trip_Distance import ImportDistanceArgs
 import sys
+from GetLatitude import get_latitude
+
+from GetDistance import get_closest_airport
+from GetDistance import Point
 
 def turbulence_val(val):
     return val[1]
+
 
 def create_edges(edges):
     new_list = []
@@ -29,7 +33,6 @@ def compute_weights(journey, scaling, cache):
             turbulence_now = turbulence
         else:
             val = calc_turbulence(last, cur)
-            print(last + ", " + cur)
             turbulence_now = val
             cache.computation_val(id, val)
         turbulence += turbulence_now
@@ -60,41 +63,56 @@ def sort_paths(paths, scaling, cache):
     return paired_val[:]
 
 
+def produce_paths(start, dest, scaling):
+        if (scaling<.1):
+            scaling = .1
+        if (scaling > .9):
+            scaling = .9
+        f = Flight()
+        edges = f.edges
+        edges = create_edges(edges)
+        graph = Graph(edges)
+        paths = graph.get_unique_paths(start, dest)
+        cache = Cache()
+        sorted_paths = sort_paths(paths, scaling, cache)
+        sorted_p = []
+        sorted_overall = []
+        sorted_distance = []
+        sorted_turbulence = []
+        for x in sorted_paths:
+            if not sorted_p:
+                sorted_p = [x[0]]
+                sorted_overall = [x[1]]
+                sorted_distance = [x[2]]
+                sorted_turbulence = [x[3]]
+            else:
+                sorted_p.append(x[0])
+                sorted_overall.append(x[1])
+                sorted_distance.append(x[2])
+                sorted_turbulence.append(x[3])
+        sorted_travel_paths = []
+        sorted_p_strings = ""
+        for y in sorted_p:
+            sorted_p_strings = ""
+            sorted_p_strings += (y[0])
+            for i in range(1, len(y)):
+                sorted_p_strings += " &rarr; " + y[i]
+            sorted_travel_paths.append(sorted_p_strings)
+
+        print([sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence])
+        return [sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence]
+
 def main():
-    start = "SFO"#sys.argv[0]
-    dest = "LGB"#sys.argv[1]
-    scaling = 0.5#sys.argv[2]
-    if (scaling<.1):
-        scaling = .1
-    if (scaling > .9):
-        scaling = .9
-    f = Flight()
-    edges = f.edges
-    edges = create_edges(edges)
-    graph = Graph(edges)
-    paths = graph.get_unique_paths(start, dest)
-    cache = Cache()
-    sorted_paths = sort_paths(paths, scaling, cache)
-    sorted_p = []
-    sorted_overall = []
-    sorted_distance = []
-    sorted_turbulence = []
-    for x in sorted_paths:
-        if not sorted_p:
-            sorted_p = [x[0]]
-            sorted_overall = [x[1]]
-            sorted_distance = [x[2]]
-            sorted_turbulence = [x[3]]
-        else:
-            sorted_p.append(x[0])
-            sorted_overall.append(x[1])
-            sorted_distance.append(x[2])
-            sorted_turbulence.append(x[3])
-    print sorted_p
-    print sorted_overall
-    print sorted_distance
-    print sorted_turbulence
-    return [sorted_p, sorted_overall, sorted_distance, sorted_turbulence]
+    if (len(sys.argv) > 2):
+        start = sys.argv[1]
+        dest = sys.argv[2]
+        scaling = float(sys.argv[3])
+        origin_loc = get_latitude(start)
+        dest_loc = get_latitude(dest)
+        start_airport = get_closest_airport(origin_loc)
+        dest_loc = get_closest_airport(dest_loc)
+        produce_paths(start_airport, dest_loc, scaling)
+
 
 if __name__ == "__main__":
     main()
