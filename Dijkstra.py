@@ -1,6 +1,5 @@
 from collections import deque, namedtuple
 
-
 Edge = namedtuple('Edge', 'start, end')
 
 

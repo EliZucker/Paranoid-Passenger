@@ -5,9 +5,8 @@ from Datum import Cache
 from Trip_Distance import ImportDistanceArgs
 import sys
 from GetLatitude import get_latitude
-
+from Wait_Times import ParseData
 from GetDistance import get_closest_airport
-from GetDistance import Point
 
 def turbulence_val(val):
     return val[1]
@@ -62,7 +61,6 @@ def sort_paths(paths, scaling, cache):
     paired_val.sort(key=turbulence_val)
     return paired_val[:]
 
-
 def produce_paths(start, dest, scaling):
         if (scaling<.1):
             scaling = .1
@@ -98,9 +96,21 @@ def produce_paths(start, dest, scaling):
             for i in range(1, len(y)):
                 sorted_p_strings += " &rarr; " + y[i]
             sorted_travel_paths.append(sorted_p_strings)
-
-        print([sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence])
-        return [sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence]
+        dict = ParseData(sorted_p[0][0] + '')
+        Morning = []
+        Afternoon = []
+        Evening = []
+        Night = []
+        max = get_max(lambda x: x, [dict['Morning'], dict['Afternoon'], dict['Evening'], dict['Night']])
+        for z in sorted_p:
+            Morning.append(dict['Morning'] / max)
+            Afternoon.append(dict['Afternoon'] / max)
+            Evening.append(dict['Evening'] / max)
+            Night.append(dict['Night'] / max)
+        print([sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence, Morning, Afternoon,
+               Evening, Night])
+        return [sorted_travel_paths, sorted_overall, sorted_distance, sorted_turbulence, Morning, Afternoon,
+               Evening, Night]
 
 def main():
     if (len(sys.argv) > 2):

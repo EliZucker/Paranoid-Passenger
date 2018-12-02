@@ -1,23 +1,4 @@
-## IMPORT STATEMENTS
-
-# Unittest used for testing purposes
-import unittest
-# Json used to parse REST API request results
-import json
-# Requests used to pull REST API results
-import requests
-# Pickle used for caching REST API request results
-import pickle
-# ET used for parsing TSA Metadata XML
-import xml.etree.ElementTree as ET
-# Math used for rounding up
 import math
-# String used for uppercase conversions
-import string
-
-import sys
-
-from math import sin, cos, sqrt, atan2, radians
 
 JetBlueDatum = {
     "UVF": {
@@ -457,15 +438,15 @@ def calc_dist(oglat, oglon, dstlat, dstlon):
     # approximate radius of earth in km
     R = 6373.0
 
-    lat1 = radians(oglat)
-    lon1 = radians(oglon)
-    lat2 = radians(dstlat)
-    lon2 = radians(dstlon)
+    lat1 = math.radians(oglat)
+    lon1 = math.radians(oglon)
+    lat2 = math.radians(dstlat)
+    lon2 = math.radians(dstlon)
     dlon = lon2 - lon1
     dlat = lat2 - lat1
 
-    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     distance = (R * c) / 1.6
     return distance
 

@@ -1,6 +1,8 @@
 import requests
 from GetDistance import Point
+from geopy.geocoders import Nominatim
 
+#{'place_id': '9167009604', 'type': 'attraction', ..
 
 key = "AIzaSyAOWEPWyJI_9NZ0H_5rDaDp7jt2eVn-KC0"
 str1 = "https://maps.googleapis.com/maps/api/geocode/json?address="
@@ -22,3 +24,11 @@ def get_latitude(s):
     data = r.json()
     loc = data.get("results")[0].get("geometry").get("location")
     return Point(loc.get("lat"), loc.get("lng"))
+
+'''
+def get_latitude(address):
+    geolocator = Nominatim(user_agent="ParanoidPassenger")
+    location = geolocator.geocode(address)
+    print(location.latitude, location.longitude)
+    return Point(location.latitude, location.longitude)
+'''

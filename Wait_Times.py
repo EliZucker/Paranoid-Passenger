@@ -1,20 +1,5 @@
-## IMPORT STATEMENTS
-
-# Unittest used for testing purposes
-import unittest
-# Json used to parse REST API request results
-import json
-# Requests used to pull REST API results
 import requests
-# Pickle used for caching REST API request results
-import pickle
-# ET used for parsing TSA Metadata XML
-import xml.etree.ElementTree as ET
-# Math used for rounding up
-import math
-# String used for uppercase conversions
-import string
-import sys
+import json
 
 def GetTSAWaitTimes(airportCode):
     """
@@ -41,13 +26,9 @@ def GetTSAWaitTimes(airportCode):
         # sys.exit(1)
         quit()
 
-def ImportAirportCode():
-	code = sys.argv[1]
-	return GetTSAWaitTimes(code)
-
-def ParseData():
+def ParseData(AirportCode):
 	#4am-11am is Morning, 11:01 - 4pm afternoon, 4:01 - 8:00 pm evening, 8:01-3:59 is night
-	DataList = ImportAirportCode()['WaitTimes']
+	DataList = GetTSAWaitTimes(AirportCode)['WaitTimes']
 	Morning = 0
 	Mcount = 0
 	Afternoon = 0
@@ -94,10 +75,3 @@ def ParseData():
 		Nout = float(Night) / Ncount
 	return {'Morning': Mout, 'Afternoon': Aout, 
 			'Evening': Eout, 'Night': Nout}
-
-
-def Main1():
-	return ParseData()
-	
-
-Main1()
