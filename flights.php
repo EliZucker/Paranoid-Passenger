@@ -66,20 +66,17 @@ $inputloc2 = $_GET["inputloc2"];
 
 <div id="error_msg"> </div>
     <div id="content">
-        <!-- show loading image when opening the page -->
-        <!-- <img src="images/loading.gif"/> -->
-        <!-- <div id='pending'> Loadinggggg </div> -->
-        <img src='1amw.gif'></>
+    <div class="starter-template"><img src='1amw.gif' />
+    </div>
     </div>
      <script type="text/javascript">
        $(document).ready(function(){
-
            var xhttp = new XMLHttpRequest();
            xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log('success : ', this.responseText);
             // remove loading image and add content received from php 
-        $('div#content').html( this.responseText);
+        $('div#content').html(this.responseText);
        }
     };
     xhttp.open("GET", '/displayflights.php?inputloc1=<?php echo $inputloc1; ?>&inputloc2=<?php echo $inputloc2; ?>', true);

@@ -2,7 +2,7 @@
 $inputloc1 = $_GET["inputloc1"]; 
 $inputloc2 = $_GET["inputloc2"]; 
 
-// $pyresult = exec("python /Users/eli/Sites/testscript.py");
+$pyresult = exec("python /Users/eli/Sites/testscript.py");
 // echo $pyresult;
 
 $flight_strings = array("SFO &rarr; EGD", "SDE &rarr; SDF", "CHI &rarr; KBR", "IDB &rarr; BGD", "BMK &rarr; IUY");
