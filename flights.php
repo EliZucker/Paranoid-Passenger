@@ -14,9 +14,12 @@
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
   </head>
 
   <body>
@@ -56,8 +59,12 @@
 
 <main role="main" class="container">
 
-    <h1>Addition</h1>
-    <div id="error_msg"> </div>
+<?php
+$inputloc1 = $_GET["inputloc1"]; 
+$inputloc2 = $_GET["inputloc2"]; 
+?>
+
+<div id="error_msg"> </div>
     <div id="content">
         <!-- show loading image when opening the page -->
         <!-- <img src="images/loading.gif"/> -->
@@ -75,41 +82,14 @@
         $('div#content').html( this.responseText);
        }
     };
-    xhttp.open("GET", "/bestflight2.php?num1=258&num2=121", true);
+    xhttp.open("GET", '/displayflights.php?inputloc1=<?php echo $inputloc1; ?>&inputloc2=<?php echo $inputloc2; ?>', true);
     xhttp.send(); 
-
-    // $.ajax({        // call php script
-    //     url: 'php/bestflight2.php?num1=258&num2=121',
-    //     type:'GET',
-    //     timeout: 500,
-    //     contentType: 'html'
-    // }).success(function(data){
-    //     console.log('success : ',data)
-    //         // remove loading image and add content received from php 
-    //     $('div#content').html(data);
-        
-
-    // }).error(function(jqXHR, textStatus, errorThrown){
-    //     console.log('error : ',errorThrown)
-    //         // in case something went wrong, show error
-    //     $('div#error_msg').append('Sorry, something went wrong: ' + textStatus + ' (' + errorThrown + ')');
-    // });
 });
-    </script>
+</script>
 
 
-      <!---- <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div> -->
-
-    </main><!-- /.container -->
-
-   <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
-   
-  </body>
+</main><!-- /.container -->
+</body>
 </html>
 
 
