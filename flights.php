@@ -23,7 +23,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="/index.html">
         <img src="badlogo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -57,7 +56,7 @@
       </div>
     </nav>
 
-<main role="main" class="container">
+<!-- <main role="main" class="container"> -->
 
 <?php
 $inputloc1 = $_GET["inputloc1"]; 
@@ -66,39 +65,81 @@ $inputloc2 = $_GET["inputloc2"];
 
 <div id="error_msg"> </div>
     <div id="content">
-    <div class="starter-template">
-
-      <img src='plane-loader-slower.gif' />
-
-      <!-- <canvas id="mycanvas">Get a new browser</canvas>
+    <div class="starter-template" style="padding-top: 0rem; padding: 0rem 0em">
+    <canvas id="mycanvas">Get a new browser</canvas>
 		<script>
 		var c = document.getElementById("mycanvas");
-		c.width = 800;
-		c.height = 500;
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+		c.width = window.innerWidth;
+		c.height = window.innerHeight;
 		var ctx = c.getContext("2d");
 		var plane = new Image();
 		plane.src = './bplane.png';
 
+		var cloud = new Image();
+		cloud.src = './cloud.png';
+
 		plane.height = window.innerWidth / 10;
 		plane.width = window.innerWidth / 10;
 
-		var x = -100;
-		var y = c.height / 6;
-		var angle = -45;
+		//var x = -200;
+		var x = 300;
+		var y = c.height / 2 - (plane.height/2);
+		var angle = 0;
+		var time = 0;
 		//y = 3 * (c.height / 10)
+		var max_tilt = 25;
 
 
 		//These would need to be adjusted on a different screen sixze
-		var max_drift = c.height / 50;
+		var max_drift = c.height / 3;
 		var period_adjust = 0.5;
 
-		/*
-		The height is a function of a a sinosoidal function
-		The delta is a function of the sinosoidal function
-		*/
+		var cloud_scale = 1;
 
+
+		cloud.width = window.innerWidth / 13;
+		cloud.height = cloud.width;
+
+		var clouds = [[100, 100], [c.width + (cloud.width/2), 300], [300, 400], [400, 150], [530, 320], [700,100]]
+
+		var tailballs = []
+
+		function draw_clouds(clouds)
+		{
+			for (i=0;i<clouds.length;i++)
+			{
+				cx = clouds[i][0]
+				cy = clouds[i][1]
+				ctx.drawImage(cloud, cx - (cloud.width / 2), cy - (cloud.height / 2), cloud.width, cloud.height);
+				clouds[i][0] -= 7
+
+				if (clouds[i][0]  + (cloud.width / 2) < 0)
+				{
+					clouds[i][0] = c.width + (cloud.width/2)
+				}
+			}
+		}
+
+		function draw_tail(tails)
+		{
+
+			for (i=0;i<tailballs.length;i++)
+			{
+				cx = tailballs[i][0]
+				cy = tailballs[i][1]
+				size = tailballs[i][2]
+				tailballs[i][3] += Math.PI/40
+				ctx.beginPath();
+				ctx.arc(cx,cy,size + 3 * Math.cos(tailballs[i][3]),0,2*Math.PI);
+				ctx.stroke();
+				ctx.fillStyle = '#2d7df6'
+				ctx.fill()
+				tailballs[i][0] -= 7;
+				console.log(tailballs)
+				if (cx + 30< 0) 
+					tailballs.shift()
+			}
+		}
 
 		function draw(x, y, ang)
 		{
@@ -111,6 +152,8 @@ $inputloc2 = $_GET["inputloc2"];
 			ctx.rotate(-ang*Math.PI/180);
 			ctx.drawImage(plane, - (plane.width / 2), - (plane.height / 2), plane.width, plane.height);
 			ctx.restore();
+			draw_clouds(clouds)
+			draw_tail(tailballs)
 		}
 
 		plane.onload = function() {
@@ -132,24 +175,30 @@ $inputloc2 = $_GET["inputloc2"];
 
 		function update()
 		{
-			
+			time += 1
 			if (x  > c.width - (plane.width + 30))
 			{
 				x = -200
 				y = c.height / 6
 			}
-				
-			x = x + 8;
-			drift = Math.cos(period_adjust*x*Math.PI/180) * max_drift;
-			y = y + drift
-			draw(x-100, y, angle);
+			if (time % 5 ==0)
+			{
+				tailballs.push([x, y + (Math.sin(4*time*Math.PI/180) * max_tilt) + (plane.height/2), 4, 0])
+			}
+			//x = x + 8;
+			//drift = Math.cos(period_adjust*x*Math.PI/180) * max_drift;
+			drift = Math.cos(4*time*(Math.PI/180)) * max_drift;
+			angle = (Math.sin(4*time*Math.PI/180) * max_tilt);
+
+			y = c.height / 2 - (plane.height/2) + drift
+			draw(x, y, angle-45);
+
+			// flat is -45
 		}
 
 		setInterval(update, 32)
 
-
-		</script> -->
-
+    </script>
     </div>
     </div>
      <script type="text/javascript">
@@ -168,7 +217,8 @@ $inputloc2 = $_GET["inputloc2"];
 </script>
 
 
-</main><!-- /.container -->
+
+<!-- </main>/.container -->
 </body>
 </html>
 

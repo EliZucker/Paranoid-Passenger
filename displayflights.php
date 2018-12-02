@@ -40,7 +40,7 @@ for ($x = 1; $x < count($myArr[0]); $x++) {
   $travel_times[] = (float) $myArr[2][$x] * 100;
   $turbulences[] = (float) $myArr[3][$x] * 100;
 }
-
+echo '<main role="main" class="container">';
 echo '<div class="row">
 <div class="col-3">
 <div class="list-group" id="list-tab" role="tablist">
@@ -108,4 +108,5 @@ echo '<div class="row">
 </div></div></div></div>';
 }
 echo '</div></div>';
+echo '</main>';
 ?>
