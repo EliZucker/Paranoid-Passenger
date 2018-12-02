@@ -2,7 +2,7 @@
 $inputloc1 = $_GET["inputloc1"]; 
 $inputloc2 = $_GET["inputloc2"]; 
 
-$data = exec("python /Users/eli/Sites/RIPPyret.py '$inputloc1' '$inputloc2' 0.5");
+$data = exec("python RIPPyret.py '$inputloc1' '$inputloc2' 0.5");
 
 // Removing the outer list brackets
 $data =  substr($data,1,-1);
