@@ -80,10 +80,10 @@ echo '<div class="starter-template">'.$flight_strings[0].'</div>';
 echo '<div class="row">
 <div class="col-md-3"><h6 class="progress-label">Airport Wait Time</h6></div>
 <div class="col-md-8"><div class="progress" style="margin-bottom:22px;">
-<div class="progress-bar" role="progressbar" style="width: '.$morning_waits[0].'%; background-color:#2364AA !important" aria-valuenow="'.$morning_waits[0].'" aria-valuemin="0" aria-valuemax="100"></div>
-<div class="progress-bar" role="progressbar" style="width: '.$afternoon_waits[0].'%; background-color:#EA7317 !important" aria-valuenow="'.$afternoon_waits[0].'" aria-valuemin="0" aria-valuemax="100"></div>
-<div class="progress-bar" role="progressbar" style="width: '.$evening_waits[0].'%; background-color:#FEC601 !important" aria-valuenow="'.$evening_waits[0].'" aria-valuemin="0" aria-valuemax="100"></div>
-<div class="progress-bar" role="progressbar" style="width: '.$night_waits[0].'%; background-color:#56544F !important" aria-valuenow="'.$night_waits[0].'" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar" role="progressbar" style="width: '.$morning_waits[0].'%; background-color:#2364AA !important" aria-valuenow="'.$morning_waits[0].'" aria-valuemin="0" aria-valuemax="100">Morning</div>
+<div class="progress-bar" role="progressbar" style="width: '.$afternoon_waits[0].'%; background-color:#EA7317 !important" aria-valuenow="'.$afternoon_waits[0].'" aria-valuemin="0" aria-valuemax="100">Afternoon</div>
+<div class="progress-bar" role="progressbar" style="width: '.$evening_waits[0].'%; background-color:#FEC601 !important" aria-valuenow="'.$evening_waits[0].'" aria-valuemin="0" aria-valuemax="100">Evening</div>
+<div class="progress-bar" role="progressbar" style="width: '.$night_waits[0].'%; background-color:#56544F !important" aria-valuenow="'.$night_waits[0].'" aria-valuemin="0" aria-valuemax="100">Night</div>
 </div></div></div>';
 
 echo '<div class="row">
@@ -110,10 +110,10 @@ for ($x = 1; $x < count($flight_strings); $x++) {
 echo '<div class="row">
 <div class="col-md-3"><h6 class="progress-label">Airport Wait Time</h6></div>
 <div class="col-md-8"><div class="progress" style="margin-bottom:22px;">
-  <div class="progress-bar" role="progressbar" style="width: '.$morning_waits[$x].'%; background-color:#2364AA !important" aria-valuenow="'.$morning_waits[$x].'" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar" role="progressbar" style="width: '.$afternoon_waits[$x].'%; background-color:#EA7317 !important" aria-valuenow="'.$afternoon_waits[$x].'" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar" role="progressbar" style="width: '.$evening_waits[$x].'%; background-color:#FEC601 !important" aria-valuenow="'.$evening_waits[$x].'" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar" role="progressbar" style="width: '.$night_waits[$x].'%; background-color:#56544F !important" aria-valuenow="'.$night_waits[$x].'" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar" role="progressbar" style="width: '.$morning_waits[$x].'%; background-color:#2364AA !important" aria-valuenow="'.$morning_waits[$x].'" aria-valuemin="0" aria-valuemax="100">Morning</div>
+  <div class="progress-bar" role="progressbar" style="width: '.$afternoon_waits[$x].'%; background-color:#EA7317 !important" aria-valuenow="'.$afternoon_waits[$x].'" aria-valuemin="0" aria-valuemax="100">Afternoon</div>
+  <div class="progress-bar" role="progressbar" style="width: '.$evening_waits[$x].'%; background-color:#FEC601 !important" aria-valuenow="'.$evening_waits[$x].'" aria-valuemin="0" aria-valuemax="100">Evening</div>
+  <div class="progress-bar" role="progressbar" style="width: '.$night_waits[$x].'%; background-color:#56544F !important" aria-valuenow="'.$night_waits[$x].'" aria-valuemin="0" aria-valuemax="100">Night</div>
 </div></div></div>';
 
 echo '<div class="row">
