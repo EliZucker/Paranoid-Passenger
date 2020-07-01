@@ -5,4 +5,4 @@ ParanoidPassenger aims to change this by allowing users to view customized fligh
 
 Users can click through each of the routes, ordered from best to worst, and make relative comparisons according to their phobias. Our app queries real-time turbulence data from NOAA, up-to-date security checkpoint wait time reports provided by the TSA, and distance data using the JetBlue dataset in combination with the Google Distance Matrix API. We are also in the process of developing an airport terminal rating system to further ensure passengers feel most at ease.
 
-Try our project at https://paranoidpassenger.com 
+Try our project at ~~https://paranoidpassenger.com~~ **(No longer actively hosted)**
