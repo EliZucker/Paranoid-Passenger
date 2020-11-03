@@ -1,4 +1,7 @@
 # ParanoidPassenger
+
+***Winner at YHack 2018 Hackathon (JetBlue Award)***
+
 Did you know that nearly 1 in 3 adult Americans is either anxious about flying or afraid to fly?
 
 ParanoidPassenger aims to change this by allowing users to view customized flight routes specific to their concerns. Our web app takes a starting location and destination and produces several flight paths optimized to reduce turbulence, airport wait times, and travel time—all of which are pertinent to the average paranoid passenger.
